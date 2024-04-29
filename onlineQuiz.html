@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Online Quiz Application</title>
+        <style>
+            body {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+            h1 {
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 40px;
+                background-color: orange;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-weight: bold;
+            }
+
+            .thequestions {
+                margin-bottom: 15px;
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>History Quiz</h1>
+        <form id="myQuizForm">
+            <div class="theQuestions">
+                <h2>When was the declaration of independance signed?</h2>
+                <label><input type="radio" name="q1" value="August2" /> August 2, 1776</label><br>
+                <label><input type="radio" name="q1" value="August4" /> August 4, 1776</label><br>
+                <label><input type="radio" name="q1" value="August5" /> August 5, 1776</label><br>
+                <label><input type="radio" name="q1" value="August7" /> August 7, 1776</label><br>
+            </div>
+            <div class="theQuestions">
+                <h2>The United States purchased Alaska from which country?</h2>
+                <label><input type="radio" name="q2" value="Canada"> Canada</label><br>
+                <label><input type="radio" name="q2" value="Japan"> Japan</label><br>
+                <label><input type="radio" name="q2" value="Russia"> Russia</label><br>
+                <label><input type="radio" name="q2" value="Mexico"> Mexico</label><br>
+            </div>
+            <div class="theQuestions">
+                <h2>Who was the fourth president of the United States?</h2>
+                <label><input type="radio" name="q3" value="JamesMonroe"> James Monroe</label><br>
+                <label><input type="radio" name="q3" value="AndrewJackson"> Andrew Jackson</label><br>
+                <label><input type="radio" name="q3" value="ThomasJefferson"> Thomas Jefferson</label><br>
+                <label><input type="radio" name="q3" value="JamesMadison"> James Madison</label><br>
+            </div>
+            <div class="theQuestions">
+                <h2>Which era marked a switch from agricultural practices to industrial practices?</h2>
+                <label><input type="radio" name="q4" value="TheAmericanRevolution"> The American Revolution</label><br>
+                <label><input type="radio" name="q4" value="TheIndustrialRevolution"> The Industrial Revolution</label><br>
+                <label><input type="radio" name="q4" value="TheFarmerRevolution"> The Farmer Revolution</label><br>
+                <label><input type="radio" name="q4" value="TheAgriculturalRevolution"> The Agricultural Revolution</label><br>    
+            </div>
+            <div class="theQuestions">
+                <h2>What do the stripes on the American flag represent?</h2>
+                <label><input type="radio" name="q5" value="TheThirteenthGuest"> The Thirteenth Guest</label><br>
+                <label><input type="radio" name="q5" value="IndependanceFromEngland"> Independance from England</label><br>
+                <label><input type="radio" name="q5" value="TheLastSupper"> The Last Supper</label><br>
+                <label><input type="radio" name="q5" value="TheThirteenColonies"> The original thirteen colonies</label><br>
+            </div>
+
+            <button type="button" onclick="checkAnswers()" onclick="displayName()">Submit</button>
+
+        </form>
+
+        <div id="results"></div>
+
+        <script>
+            function checkAnswers() {
+                var answers = {
+                    q1: document.querySelector('input[name="q1"]:checked').value,
+                    q2: document.querySelector('input[name="q2"]:checked').value,
+                    q3: document.querySelector('input[name="q3"]:checked').value,
+                    q4: document.querySelector('input[name="q4"]:checked').value,
+                    q5: document.querySelector('input[name="q5"]:checked').value
+                };
+
+                var correctAnswer = {
+                    q1: "August2",
+                    q2: "Russia",
+                    q3: "JamesMadison",
+                    q4: "TheIndustrialRevolution",
+                    q5: "TheThirteenColonies"
+                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results:</h2>";
+
+                for (var key in answers) {
+                    results += "<p>Question " + key.slice(1) + ": Your answer was " + answers[key] + ". ";
+                    if (answers[key] === correctAnswer[key]) {
+                        results += "<span style='color: green;'>Correct!</span></p>";
+                        correctNumber++;
+                    } else {
+                        results += "<span style='color: red;'Incorrect. The real answer is " + correctAnswer[key] + ".</span></p>"; 
+                    }
+                }
+                console.log('OBJ KEYS: ', Object.keys(correctAnswer));
+                results += "<h3>Score: " + correctNumber + " out of " + Object.keys(correctAnswer).length + "</h3>";
+
+                document.getElementById('results').innerHTML = results;
+                 }
+        </script>
+    </body>
+</html>
